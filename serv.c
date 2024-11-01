@@ -45,14 +45,9 @@ int main(int argc, char const* argv[]) {
     int n, val, idx;
     
     // Set up signal handler for Ctrl-C
-    struct sigaction sa;
-    sa.sa_handler = handle_sigint;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-    if (sigaction(SIGINT, &sa, NULL) == -1) {
-        perror("Error setting up signal handler");
-        exit(1);
-    }
+    signal(SIGINT, handle_sigint);
+
+    
     
     // create server socket similar to what was done in
     // client program
